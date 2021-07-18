@@ -13,6 +13,7 @@
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
+    "@umijs/plugin-qiankun": "^2.26.0",
     "babel-eslint": "^9.0.0",
     "eslint": "^5.4.0",
     "eslint-config-umi": "^1.4.0",
@@ -27,7 +28,10 @@
     "umi-plugin-react": "^1.8.4"
   },
   "lint-staged": {
-    "*.{js,jsx}": ["eslint --fix", "git add"]
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "engines": {
     "node": ">=8.0.0"
