@@ -8,4 +8,7 @@ export default defineConfig({
     { path: '/', component: '@/pages/index' },
   ],
   fastRefresh: {},
+  qiankun: {
+    slave: {}
+  }
 });
