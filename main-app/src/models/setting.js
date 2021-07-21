@@ -1,7 +1,7 @@
 import defaultSettings from '../../config/defaultSettings';
 
 const updateColorWeak = (colorWeak) => {
-  const root = document.getElementById('root');
+  const root = document.getElementById('root-master');
 
   if (root) {
     root.className = colorWeak ? 'colorWeak' : '';
