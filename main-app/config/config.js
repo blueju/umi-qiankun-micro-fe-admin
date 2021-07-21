@@ -42,4 +42,10 @@ export default defineConfig({
   fastRefresh: {},
   esbuild: {},
   webpack5: {},
+  /**
+   * 因为需要的是动态注册子应用，所以此处置空即可。
+   */
+  qiankun: {
+    master: {},
+  },
 });
