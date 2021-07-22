@@ -1,3 +1,6 @@
+import { dynamic } from 'umi';
+import LoadingComponent from '@/components/PageLoading';
+
 // 从接口中获取子应用配置，export 出的 qiankun 变量是一个 promise
 export const qiankun = fetch('/api/apps')
   .then((res) => {
@@ -17,3 +20,31 @@ export const qiankun = fetch('/api/apps')
       // 支持更多的其他配置，详细看这里 https://qiankun.umijs.org/zh/api/#start-opts
     });
   });
+
+let extraRoutes = [];
+
+export function patchRoutes({ routes }) {
+  extraRoutes.forEach((item) => {
+    routes[0].routes[1].routes[0].routes.unshift({
+      name: item.name,
+      icon: 'smile',
+      path: item.path,
+      component: dynamic({
+        loader: () =>
+          import(/* webpackChunkName: 'layouts__MicroAppLayout' */ '@/layouts/MicroAppLayout'),
+        loading: LoadingComponent,
+      }),
+    });
+  });
+}
+
+export async function render(oldRender) {
+  fetch('/api/getRoutes')
+    .then((res) => {
+      return res.json();
+    })
+    .then((resJson) => {
+      extraRoutes = resJson;
+      oldRender();
+    });
+}

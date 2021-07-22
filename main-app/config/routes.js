@@ -34,12 +34,6 @@ export default [
                 component: './Welcome',
               },
               {
-                path: '/sub-app-1',
-                name: 'sub-app-1',
-                icon: 'smile',
-                microApp: 'sub-app-1',
-              },
-              {
                 path: '/admin',
                 name: 'admin',
                 icon: 'crown',
