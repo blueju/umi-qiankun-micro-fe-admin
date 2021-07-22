@@ -1,5 +1,6 @@
 import React from 'react';
 import { MicroApp } from 'umi';
+import { PageContainer } from '@ant-design/pro-layout';
 
 class MicroAppLayout extends React.Component {
   constructor(props) {
@@ -8,7 +9,11 @@ class MicroAppLayout extends React.Component {
   }
 
   render() {
-    return <MicroApp name={this.name} />;
+    return (
+      <PageContainer>
+        <MicroApp name={this.name} />
+      </PageContainer>
+    );
   }
 }
 
