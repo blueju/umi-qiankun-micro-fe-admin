@@ -48,4 +48,5 @@ export default defineConfig({
   qiankun: {
     master: {},
   },
+  mfsu: {}
 });
