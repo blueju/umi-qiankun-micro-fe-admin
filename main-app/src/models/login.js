@@ -41,8 +41,7 @@ const Model = {
             return;
           }
         }
-
-        history.replace(redirect || '/');
+        window.location.href = window.location.origin + (redirect || '/');
       }
     },
 

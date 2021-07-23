@@ -1,25 +1,41 @@
 import { dynamic } from 'umi';
 import LoadingComponent from '@/components/PageLoading';
+import { getAuthority } from './utils/authority';
 
 // 从接口中获取子应用配置，export 出的 qiankun 变量是一个 promise
-export const qiankun = fetch('/api/apps')
-  .then((res) => {
-    return res.json();
-  })
-  .then((resJson) => {
-    const apps = resJson;
-    return Promise.resolve({
-      // 注册子应用信息
-      apps,
-      // 完整生命周期钩子请看 https://qiankun.umijs.org/zh/api/#registermicroapps-apps-lifecycles
-      lifeCycles: {
-        afterMount: (props) => {
-          console.log(props);
-        },
+export const qiankun = () => {
+  if (getAuthority()) {
+    return fetch('/api/apps')
+      .then((res) => {
+        return res.json();
+      })
+      .then((resJson) => {
+        const apps = resJson;
+        return Promise.resolve({
+          // 注册子应用信息
+          apps,
+          // 完整生命周期钩子请看 https://qiankun.umijs.org/zh/api/#registermicroapps-apps-lifecycles
+          lifeCycles: {
+            afterMount: (props) => {
+              console.log(props);
+            },
+          },
+          // 支持更多的其他配置，详细看这里 https://qiankun.umijs.org/zh/api/#start-opts
+        });
+      });
+  }
+  return Promise.resolve({
+    // 注册子应用信息
+    apps: [],
+    // 完整生命周期钩子请看 https://qiankun.umijs.org/zh/api/#registermicroapps-apps-lifecycles
+    lifeCycles: {
+      afterMount: (props) => {
+        console.log(props);
       },
-      // 支持更多的其他配置，详细看这里 https://qiankun.umijs.org/zh/api/#start-opts
-    });
+    },
+    // 支持更多的其他配置，详细看这里 https://qiankun.umijs.org/zh/api/#start-opts
   });
+};
 
 let extraRoutes = [];
 
@@ -39,12 +55,16 @@ export function patchRoutes({ routes }) {
 }
 
 export async function render(oldRender) {
-  fetch('/api/getRoutes')
-    .then((res) => {
-      return res.json();
-    })
-    .then((resJson) => {
-      extraRoutes = resJson;
-      oldRender();
-    });
+  if (getAuthority()) {
+    fetch('/api/getRoutes')
+      .then((res) => {
+        return res.json();
+      })
+      .then((resJson) => {
+        extraRoutes = resJson;
+        oldRender();
+      });
+  } else {
+    oldRender();
+  }
 }
