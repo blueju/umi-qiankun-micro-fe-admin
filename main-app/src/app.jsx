@@ -45,6 +45,8 @@ export function patchRoutes({ routes }) {
       name: item.name,
       icon: 'smile',
       path: item.path,
+      /** 子应用路由不显示在菜单中 */
+      hideInMenu: true,
       component: dynamic({
         loader: () =>
           import(/* webpackChunkName: 'layouts__MicroAppLayout' */ '@/layouts/MicroAppLayout'),
