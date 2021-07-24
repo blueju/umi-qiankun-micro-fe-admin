@@ -150,6 +150,8 @@ const BasicLayout = (props) => {
         content: 'Ant Design Pro',
         fontColor: 'rgba(24,144,255,0.15)',
       }}
+      /** 混合菜单布局 */
+      layout="mix"
     >
       <Authorized authority={authorized.authority} noMatch={noMatch}>
         {children}
