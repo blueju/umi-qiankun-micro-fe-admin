@@ -152,6 +152,12 @@ const BasicLayout = (props) => {
       }}
       /** 混合菜单布局 */
       layout="mix"
+      /**
+       * 自定义菜单的 render 方法，
+       * 也可用于切换菜单的显示隐藏状态，
+       * 显示默认菜单：undefined，不显示菜单：false
+       */
+      menuRender={false}
     >
       <Authorized authority={authorized.authority} noMatch={noMatch}>
         {children}
