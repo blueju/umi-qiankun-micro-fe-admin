@@ -97,6 +97,13 @@ const BasicLayout = (props) => {
     [location.pathname],
   );
   const { formatMessage } = useIntl();
+
+  /** 欢迎页不显示菜单 */
+  let menuRender;
+  if (window.location.pathname.includes('/welcome')) {
+    menuRender = false;
+  }
+
   return (
     <ProLayout
       logo={logo}
@@ -157,7 +164,7 @@ const BasicLayout = (props) => {
        * 也可用于切换菜单的显示隐藏状态，
        * 显示默认菜单：undefined，不显示菜单：false
        */
-      menuRender={false}
+      menuRender={menuRender}
     >
       <Authorized authority={authorized.authority} noMatch={noMatch}>
         {children}
