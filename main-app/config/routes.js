@@ -32,6 +32,8 @@ export default [
                 name: 'welcome',
                 icon: 'smile',
                 component: './Welcome',
+                /** 欢迎页路由不显示在菜单中 */
+                hideInMenu: true,
               },
               {
                 path: '/admin',
