@@ -5,13 +5,14 @@ import { PageContainer } from '@ant-design/pro-layout';
 class MicroAppLayout extends React.Component {
   constructor(props) {
     super(props);
-    this.name = window.location.pathname.slice(1);
+    const [, currentAppName = ''] = window.location.hash.split('/');
+    this.currentAppName = currentAppName;
   }
 
   render() {
     return (
       <PageContainer>
-        <MicroApp name={this.name} />
+        <MicroApp name={this.currentAppName} />
       </PageContainer>
     );
   }
