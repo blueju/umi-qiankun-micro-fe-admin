@@ -100,7 +100,7 @@ const BasicLayout = (props) => {
 
   /** 欢迎页不显示菜单 */
   let menuRender;
-  if (window.location.pathname.includes('/welcome')) {
+  if (window.location.hash.includes('/welcome')) {
     menuRender = false;
   }
 
