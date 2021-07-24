@@ -14,6 +14,9 @@ export default defineConfig({
   ],
   fastRefresh: {},
   qiankun: {
-    slave: {}
-  }
+    slave: {},
+  },
+  history: {
+    type: 'hash',
+  },
 });
