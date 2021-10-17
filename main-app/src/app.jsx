@@ -1,14 +1,17 @@
+/**
+ * 按需加载组件 dynamic，
+ * https://umijs.org/zh-CN/docs/load-on-demand
+ */
 import { dynamic } from 'umi';
+
 import LoadingComponent from '@/components/PageLoading';
 import { getAuthority } from './utils/authority';
 
 // 从接口中获取子应用配置，export 出的 qiankun 变量是一个 promise
 export const qiankun = () => {
-  if (getAuthority()) {
+  if (getAuthority().length) {
     return fetch('/api/apps')
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((resJson) => {
         const apps = resJson;
         return Promise.resolve({
