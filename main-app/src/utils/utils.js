@@ -22,3 +22,6 @@ export const isAntDesignProOrDev = () => {
   return isAntDesignPro();
 };
 export const getPageQuery = () => parse(window.location.href.split('?')[1]);
+
+/* 主应用名 */
+export const mainAppName = 'micro-fe-admin'

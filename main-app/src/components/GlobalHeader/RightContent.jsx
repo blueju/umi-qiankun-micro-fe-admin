@@ -1,10 +1,11 @@
 import { Tooltip, Tag } from 'antd';
-import { QuestionCircleOutlined } from '@ant-design/icons';
+import { QuestionCircleOutlined, GithubOutlined } from '@ant-design/icons';
 import React from 'react';
 import { connect, SelectLang } from 'umi';
 import Avatar from './AvatarDropdown';
 import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
+
 const ENVTagColor = {
   dev: 'orange',
   test: 'green',
@@ -52,11 +53,24 @@ const GlobalHeaderRight = (props) => {
             color: 'inherit',
           }}
           target="_blank"
-          href="https://pro.ant.design/docs/getting-started"
+          href="https://pro.ant.design/zh-CN/docs/getting-started"
           rel="noopener noreferrer"
           className={styles.action}
         >
           <QuestionCircleOutlined />
+        </a>
+      </Tooltip>
+      <Tooltip title="Github">
+        <a
+          style={{
+            color: 'inherit',
+          }}
+          target="_blank"
+          href="https://github.com/blueju/umi-qiankun-micro-fe-admin"
+          rel="noopener noreferrer"
+          className={styles.action}
+        >
+          <GithubOutlined />
         </a>
       </Tooltip>
       <Avatar />

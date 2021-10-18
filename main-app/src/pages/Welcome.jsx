@@ -2,7 +2,6 @@ import React from 'react';
 import { history } from 'umi';
 import { Card, Avatar } from 'antd';
 import { LoginOutlined } from '@ant-design/icons';
-import { PageContainer } from '@ant-design/pro-layout';
 
 const { Meta } = Card;
 
@@ -13,14 +12,12 @@ export default () => {
   }
 
   return (
-    <PageContainer>
-      <Card style={{ width: 300 }} actions={[<LoginOutlined key="login" onClick={toSubApp} />]}>
-        <Meta
-          avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-          title="sub-app-1"
-          description="http://localhost:8001/"
-        />
-      </Card>
-    </PageContainer>
+    <Card style={{ width: 300 }} actions={[<LoginOutlined key="login" onClick={toSubApp} />]}>
+      <Meta
+        avatar={<Avatar src="https://img.alicdn.com/tfs/TB1zomHwxv1gK0jSZFFXXb0sXXa-200-200.png" />}
+        title="sub-app-1"
+        description="http://localhost:8001/"
+      />
+    </Card>
   );
 };
