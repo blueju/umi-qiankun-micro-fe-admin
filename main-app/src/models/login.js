@@ -1,9 +1,11 @@
-import { stringify } from 'querystring';
 import { history } from 'umi';
+import { message } from 'antd';
+import { stringify } from 'querystring';
+
 import { fakeAccountLogin } from '@/services/login';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
-import { message } from 'antd';
+
 const Model = {
   namespace: 'login',
   state: {
@@ -21,6 +23,11 @@ const Model = {
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         message.success('🎉 🎉 🎉  登录成功！');
+        // 保存用户信息
+        yield put({
+          type: 'global/saveUserInfo',
+          payload: response,
+        });
         let { redirect } = params;
 
         if (redirect) {
@@ -41,7 +48,7 @@ const Model = {
             return;
           }
         }
-        window.location.href = window.location.origin + (redirect || '/');
+        window.location.href = window.location.origin;
       }
     },
 

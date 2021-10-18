@@ -1,27 +1,20 @@
 import React from 'react';
-import { PageContainer } from '@ant-design/pro-layout';
+import { history } from 'umi';
 import { Card, Avatar } from 'antd';
 import { LoginOutlined } from '@ant-design/icons';
-import { history } from 'umi';
+import { PageContainer } from '@ant-design/pro-layout';
 
 const { Meta } = Card;
 
 export default () => {
+  /* 前往子应用 */
   function toSubApp() {
     history.push('/sub-app-1');
   }
+
   return (
     <PageContainer>
-      <Card
-        style={{ width: 300 }}
-        cover={
-          <img
-            alt="example"
-            src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-          />
-        }
-        actions={[<LoginOutlined key="login" onClick={toSubApp} />]}
-      >
+      <Card style={{ width: 300 }} actions={[<LoginOutlined key="login" onClick={toSubApp} />]}>
         <Meta
           avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
           title="sub-app-1"

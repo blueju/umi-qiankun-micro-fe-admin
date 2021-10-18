@@ -1,3 +1,6 @@
+import { getApps } from './apps';
+import { getRoutes } from './routes';
+
 const waitTime = (time = 100) => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -87,12 +90,16 @@ export default {
   'POST /api/login/account': async (req, res) => {
     const { password, userName, type } = req.body;
     await waitTime(2000);
-
+    const userInfo = {
+      apps: getApps(),
+      routes: getRoutes(),
+    };
     if (password === 'ant.design' && userName === 'admin') {
       res.send({
         status: 'ok',
         type,
         currentAuthority: 'admin',
+        userInfo
       });
       return;
     }
@@ -102,6 +109,7 @@ export default {
         status: 'ok',
         type,
         currentAuthority: 'user',
+        userInfo
       });
       return;
     }

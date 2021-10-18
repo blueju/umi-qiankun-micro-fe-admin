@@ -4,13 +4,14 @@
  */
 import { dynamic } from 'umi';
 
-import LoadingComponent from '@/components/PageLoading';
 import { getAuthority } from './utils/authority';
+import LoadingComponent from '@/components/PageLoading';
+import { getAppsUrl, getRoutesUrl } from './utils/apiUrl';
 
 // 从接口中获取子应用配置，export 出的 qiankun 变量是一个 promise
 export const qiankun = () => {
-  if (getAuthority().length) {
-    return fetch('/api/apps')
+  if (getAuthority()) {
+    return fetch(getAppsUrl)
       .then((res) => res.json())
       .then((resJson) => {
         const apps = resJson;
@@ -61,7 +62,7 @@ export function patchRoutes({ routes }) {
 
 export async function render(oldRender) {
   if (getAuthority()) {
-    fetch('/api/getRoutes')
+    fetch(getRoutesUrl)
       .then((res) => {
         return res.json();
       })

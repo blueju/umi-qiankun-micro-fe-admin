@@ -1,9 +1,12 @@
 import { queryNotices } from '@/services/user';
+
 const GlobalModel = {
   namespace: 'global',
   state: {
     collapsed: false,
     notices: [],
+    /* 用户信息 */
+    userInfo: {},
   },
   effects: {
     *fetchNotices(_, { call, put, select }) {
@@ -98,6 +101,12 @@ const GlobalModel = {
         collapsed: false,
         notices: state.notices.filter((item) => item.type !== payload),
       };
+    },
+
+    /* 保存用户信息 */
+    saveUserInfo(state, { payload }) {
+      localStorage.setItem('micro-fe-admin', JSON.stringify(payload.userInfo));
+      return { ...state, userInfo: payload.userInfo };
     },
   },
 };
