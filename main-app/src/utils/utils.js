@@ -24,4 +24,11 @@ export const isAntDesignProOrDev = () => {
 export const getPageQuery = () => parse(window.location.href.split('?')[1]);
 
 /* 主应用名 */
-export const mainAppName = 'micro-fe-admin'
+export const mainAppName = 'micro-fe-admin';
+
+/* 获取当前应用名称 */
+export const getCurrentAppName = () => {
+  // 数组解构赋值，直接取第二项
+  const [, currentAppName = ''] = window.location.hash.split('/');
+  return currentAppName
+};

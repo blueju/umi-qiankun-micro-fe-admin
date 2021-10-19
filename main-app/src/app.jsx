@@ -16,7 +16,7 @@ export const qiankun = () => {
       return innerRoutes.map((item) => {
         return {
           ...item,
-          microApp: item.name,
+          microApp: item.app,
         };
       });
     };

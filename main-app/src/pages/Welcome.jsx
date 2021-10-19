@@ -2,6 +2,7 @@ import React from 'react';
 import { history } from 'umi';
 import { Card, Avatar } from 'antd';
 import { LoginOutlined } from '@ant-design/icons';
+import { mainAppName } from '@/utils/utils';
 
 const { Meta } = Card;
 
@@ -11,13 +12,20 @@ export default () => {
     history.push('/sub-app-1');
   }
 
-  return (
-    <Card style={{ width: 300 }} actions={[<LoginOutlined key="login" onClick={toSubApp} />]}>
-      <Meta
-        avatar={<Avatar src="https://img.alicdn.com/tfs/TB1zomHwxv1gK0jSZFFXXb0sXXa-200-200.png" />}
-        title="sub-app-1"
-        description="http://localhost:8001/"
-      />
-    </Card>
-  );
+  function renderAppCard() {
+    const { apps } = JSON.parse(localStorage.getItem(mainAppName));
+    return apps.map((item) => {
+      return (
+        <Card
+          key={item.name}
+          style={{ width: 300 }}
+          actions={[<LoginOutlined key="login" onClick={toSubApp} />]}
+        >
+          <Meta avatar={<Avatar src={item.icon} />} title={item.chinseName} description={item.entry} />
+        </Card>
+      );
+    });
+  }
+
+  return <>{renderAppCard()}</>;
 };

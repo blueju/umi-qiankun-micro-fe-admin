@@ -6,7 +6,7 @@ export default defineConfig({
   },
   routes: [
     /** 首页 */
-    { path: '/', component: '@/pages/index' },
+    { path: '/index', component: '@/pages/index' },
     /** 表单页 */
     { path: '/form', component: '@/pages/Form/index' },
     /** 表格页 */
