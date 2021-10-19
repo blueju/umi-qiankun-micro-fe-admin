@@ -20,6 +20,13 @@ export function getApps() {
       icon: 'https://img.alicdn.com/tfs/TB1zomHwxv1gK0jSZFFXXb0sXXa-200-200.png',
       homepage: '/sub-app-1/index',
     },
+    {
+      name: 'sub-app-2',
+      chineseName: 'React微应用',
+      entry: 'http://localhost:8002',
+      icon: 'https://zh-hant.reactjs.org/icons/icon-144x144.png',
+      homepage: '/sub-app-2/index',
+    },
   ] as IApp[];
 }
 
