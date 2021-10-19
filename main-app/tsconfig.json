@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    /* 允许使用 jsx 语法 */
+    "jsx": "react",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    /* https://zhuanlan.zhihu.com/p/29022311 */
+    "allowSyntheticDefaultImports": true
+  }
+}

@@ -1,3 +1,4 @@
+// @ts-ignore
 import { history } from 'umi';
 import { Card, Avatar, Popover, Tooltip } from 'antd';
 import React, { useEffect, useState } from 'react';
@@ -10,12 +11,25 @@ import {
 } from '@ant-design/icons';
 
 import { mainAppName } from '@/utils/utils';
+import { IApp } from '../../mock/apps';
 
 const { Meta } = Card;
 const { apps } = JSON.parse(localStorage.getItem(mainAppName));
 
+/* app 连通性状态 */
+const appConnectableStatus = {
+  pending: 'pending',
+  true: 'true',
+  false: 'false',
+};
+
+/* 扩展了连通性状态的 app interface */
+interface IAppWithConnectable extends IApp {
+  connectable: string;
+}
+
 export default () => {
-  const [appsWithConnectable, setAppsWithConnectable] = useState(
+  const [appsWithConnectable, setAppsWithConnectable] = useState<IAppWithConnectable[]>(
     apps.map((item) => {
       return {
         ...item,
@@ -28,19 +42,21 @@ export default () => {
    * 前往子应用
    * @param homepage 应用首页
    */
-  function toSubApp(homepage) {
+  function toSubApp(homepage: string) {
     history.push(homepage);
   }
 
   /* 检测应用连通性 */
   function checkAppConnection() {
-    const connectAppsPromiseList = appsWithConnectable.map((item) => {
+    const connectAppsPromiseList: Promise<Response>[] = appsWithConnectable.map((item) => {
       return fetch(item.entry);
     });
     const newAppsWithConnectable = [...appsWithConnectable];
+    // @ts-ignore
     Promise.allSettled(connectAppsPromiseList).then((res) => {
       res.forEach((item, index) => {
-        newAppsWithConnectable[index].connectable = item.status === 'fulfilled';
+        newAppsWithConnectable[index].connectable =
+          item.status === 'fulfilled' ? appConnectableStatus.true : appConnectableStatus.false;
       });
       setAppsWithConnectable(newAppsWithConnectable);
     });
