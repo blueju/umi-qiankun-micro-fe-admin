@@ -1,4 +1,4 @@
-interface IApp {
+export interface IApp {
   /* 应用名称 */
   name: string;
   /* 应用名称（中文） */

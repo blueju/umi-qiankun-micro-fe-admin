@@ -6,32 +6,35 @@
 
 import { getAuthority } from './utils/authority';
 // import LoadingComponent from '@/components/PageLoading';
-import { mainAppName } from './utils/utils';
 
 // 从接口中获取子应用配置，export 出的 qiankun 变量是一个 promise
 export const qiankun = () => {
   if (getAuthority()) {
-    const { apps, routes } = JSON.parse(localStorage.getItem(mainAppName));
-    const handleRoutes = (innerRoutes) => {
-      return innerRoutes.map((item) => {
-        return {
-          ...item,
-          microApp: item.app,
+    return fetch('/api/getUserInfo')
+      .then((res) => res.json())
+      .then((resJson) => {
+        const { apps = [], routes = [] } = resJson;
+        const handleRoutes = (innerRoutes) => {
+          return innerRoutes.map((item) => {
+            return {
+              ...item,
+              microApp: item.app,
+            };
+          });
         };
+        return Promise.resolve({
+          // 注册子应用信息
+          apps,
+          routes: handleRoutes(routes),
+          // 完整生命周期钩子请看 https://qiankun.umijs.org/zh/api/#registermicroapps-apps-lifecycles
+          lifeCycles: {
+            afterMount: (props) => {
+              console.log(props);
+            },
+          },
+          // 支持更多的其他配置，详细看这里 https://qiankun.umijs.org/zh/api/#start-opts
+        });
       });
-    };
-    return Promise.resolve({
-      // 注册子应用信息
-      apps,
-      routes: handleRoutes(routes),
-      // 完整生命周期钩子请看 https://qiankun.umijs.org/zh/api/#registermicroapps-apps-lifecycles
-      lifeCycles: {
-        afterMount: (props) => {
-          console.log(props);
-        },
-      },
-      // 支持更多的其他配置，详细看这里 https://qiankun.umijs.org/zh/api/#start-opts
-    });
   }
   return Promise.resolve({
     // 注册子应用信息

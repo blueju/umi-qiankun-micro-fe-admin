@@ -7,9 +7,12 @@ import { mainAppName } from '@/utils/utils';
 const { Meta } = Card;
 
 export default () => {
-  /* 前往子应用 */
-  function toSubApp() {
-    history.push('/sub-app-1');
+  /**
+   * 前往子应用
+   * @param homepage 应用首页
+   */
+  function toSubApp(homepage) {
+    history.push(homepage);
   }
 
   function renderAppCard() {
@@ -19,9 +22,13 @@ export default () => {
         <Card
           key={item.name}
           style={{ width: 300 }}
-          actions={[<LoginOutlined key="login" onClick={toSubApp} />]}
+          actions={[<LoginOutlined key="login" onClick={() => toSubApp(item.homepage)} />]}
         >
-          <Meta avatar={<Avatar src={item.icon} />} title={item.chinseName} description={item.entry} />
+          <Meta
+            avatar={<Avatar src={item.icon} />}
+            title={item.chineseName}
+            description={item.entry}
+          />
         </Card>
       );
     });
