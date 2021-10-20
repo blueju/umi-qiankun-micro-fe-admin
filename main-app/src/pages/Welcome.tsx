@@ -85,6 +85,7 @@ export default () => {
       return (
         <Col span={8} key={item.name}>
           <Card
+            style={{ marginRight: 24, marginBottom: 24 }}
             actions={[
               <Tooltip key="appConnectable" title={`应用连通${item.connectable ? '正常' : '异常'}`}>
                 <div>{renderAppConnectableIcon(item.connectable)}</div>
@@ -129,6 +130,13 @@ export default () => {
     <Row>
       <Col span={16}>
         <Row>{renderAppCard()}</Row>
+      </Col>
+      <Col span={8}>
+        <Card title="待办事项" extra={<a href="#">更多</a>}>
+          <p>Card content</p>
+          <p>Card content</p>
+          <p>Card content</p>
+        </Card>
       </Col>
     </Row>
   );

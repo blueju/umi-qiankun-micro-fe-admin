@@ -24,7 +24,21 @@ export function getApps() {
       name: 'sub-app-2',
       chineseName: 'React微应用',
       entry: 'http://localhost:8002',
-      icon: 'https://zh-hant.reactjs.org/icons/icon-144x144.png',
+      icon: 'https://www.runoob.com/wp-content/uploads/2016/02/react.png',
+      homepage: '/sub-app-2/index',
+    },
+    {
+      name: 'sub-app-3',
+      chineseName: 'Vue微应用',
+      entry: 'http://localhost:8003',
+      icon: 'https://www.runoob.com/wp-content/uploads/2017/01/vue.png',
+      homepage: '/sub-app-2/index',
+    },
+    {
+      name: 'sub-app-4',
+      chineseName: 'Angular微应用',
+      entry: 'http://localhost:8004',
+      icon: 'https://www.runoob.com/wp-content/uploads/2014/06/angular.jpg',
       homepage: '/sub-app-2/index',
     },
   ] as IApp[];
