@@ -6,3 +6,10 @@
   background: @input-bg;
   box-shadow: @card-shadow;
 }
+
+// Javascript如何与Sass,Less,Css之间共享变量：https://segmentfault.com/a/1190000018795983
+// CSS Modules 特性与项目实践：https://juejin.cn/post/6992428132263264264
+:export {
+  successColor: @success-color;
+  errorColor: @error-color,
+}
