@@ -1,6 +1,6 @@
-// @ts-ignore
-import { history } from 'umi';
 import { noop } from 'lodash';
+// @ts-ignore
+import { history, Link } from 'umi';
 import React, { useEffect, useState } from 'react';
 import { Card, Avatar, Popover, Tooltip, Row, Col } from 'antd';
 import {
@@ -12,7 +12,7 @@ import {
 
 import { IApp } from '../../mock/apps';
 // @ts-ignore
-import styles from './Welcome.less'
+import styles from './Welcome.less';
 import { mainAppName } from '@/utils/utils';
 
 const { Meta } = Card;
@@ -105,6 +105,29 @@ export default () => {
     ) : null;
   }
 
+  /* 渲染权限管理卡片 */
+  function renderRbacCard() {
+    return (
+      <Col span={8}>
+        <Card
+          style={{ marginRight: 24, marginBottom: 24 }}
+          actions={[
+            <Link to="/main-app/">进入</Link>,
+          ]}
+        >
+          <Meta
+            avatar={
+              <Avatar src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
+            }
+            title="权限管理"
+            description={window.location.origin}
+          />
+        </Card>
+      </Col>
+    );
+  }
+
+  /* 渲染应用卡片 */
   function renderAppCard() {
     return appsWithConnectionStatus.map((item) => {
       return (
@@ -157,7 +180,10 @@ export default () => {
   return (
     <Row>
       <Col span={16}>
-        <Row>{renderAppCard()}</Row>
+        <Row>
+          {renderRbacCard()}
+          {renderAppCard()}
+        </Row>
       </Col>
       <Col span={8}>
         <Card title="待办事项" extra={<a href="#">更多</a>}>
