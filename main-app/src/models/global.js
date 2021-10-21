@@ -1,4 +1,4 @@
-import { mainAppName } from '@/utils/utils';
+import { microFeAdminName } from '@/utils/utils';
 import { queryNotices } from '@/services/user';
 
 const GlobalModel = {
@@ -106,7 +106,7 @@ const GlobalModel = {
 
     /* 保存用户信息 */
     saveUserInfo(state, { payload }) {
-      localStorage.setItem(mainAppName, JSON.stringify(payload.userInfo));
+      localStorage.setItem(microFeAdminName, JSON.stringify(payload.userInfo));
       return { ...state, userInfo: payload.userInfo };
     },
   },

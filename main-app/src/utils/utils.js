@@ -23,8 +23,8 @@ export const isAntDesignProOrDev = () => {
 };
 export const getPageQuery = () => parse(window.location.href.split('?')[1]);
 
-/* 主应用名 */
-export const mainAppName = 'micro-fe-admin';
+/* 微前端管理平台名称 */
+export const microFeAdminName = 'micro-fe-admin';
 
 /* 获取当前应用名称 */
 export const getCurrentAppName = () => {

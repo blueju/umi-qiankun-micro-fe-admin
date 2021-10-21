@@ -13,10 +13,10 @@ import {
 import { IApp } from '../../mock/apps';
 // @ts-ignore
 import styles from './Welcome.less';
-import { mainAppName } from '@/utils/utils';
+import { microFeAdminName } from '@/utils/utils';
 
 const { Meta } = Card;
-const { apps } = JSON.parse(localStorage.getItem(mainAppName));
+const { apps } = JSON.parse(localStorage.getItem(microFeAdminName));
 
 /* 扩展了连通性状态的 app interface */
 interface IAppWithConnectionStatus extends IApp {
@@ -111,9 +111,7 @@ export default () => {
       <Col span={8}>
         <Card
           style={{ marginRight: 24, marginBottom: 24 }}
-          actions={[
-            <Link to="/main-app/">进入</Link>,
-          ]}
+          actions={[<Link to="/main-app/">进入</Link>]}
         >
           <Meta
             avatar={
