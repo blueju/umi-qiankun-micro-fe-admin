@@ -26,6 +26,9 @@ export const getPageQuery = () => parse(window.location.href.split('?')[1]);
 /* 微前端管理平台名称 */
 export const microFeAdminName = 'micro-fe-admin';
 
+/* 主应用名称 */
+export const mainAppName = 'main-app';
+
 /* 获取当前应用名称 */
 export const getCurrentAppName = () => {
   // 数组解构赋值，直接取第二项
