@@ -1,0 +1,20 @@
+{
+  "name": "umi-qiankun-micro-fe-admin",
+  "description": "umi-qiankun-micro-fe-admin",
+  "scripts": {
+    "start": "npm run start:main-app && npm run start:sub-app-1 && npm run start:sub-app-react",
+    "start:main-app": "cd ./main-app/ && npm run start",
+    "start:sub-app-1": "cd ./sub-app-1/ && npm run start",
+    "start:sub-app-react": "cd ./sub-app-react/ && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blueju/umi-qiankun-micro-fe-admin.git"
+  },
+  "author": "blueju<blueju@foxmial.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blueju/umi-qiankun-micro-fe-admin/issues"
+  },
+  "homepage": "https://github.com/blueju/umi-qiankun-micro-fe-admin#readme"
+}
