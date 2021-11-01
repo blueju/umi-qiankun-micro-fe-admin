@@ -23,6 +23,19 @@
     />
     <title>Ant Design Pro</title>
     <link rel="icon" href="<%= context.config.publicPath +'favicon.ico'%>" type="image/x-icon" />
+    <style>
+      @font-face {
+        font-family: 'SF Pro SC';
+        /* 下面这个 woff2 字体虽然体积大大减小，但是效果不好，字看起来很小 */
+        /*src: local('☺'), url('PingFangSC-Regular.woff2') format('woff2');*/
+        /* 下面这个字体体积比较大，但是胜在字看起来是正常大小 */
+        src: local('☺'), url('PingFang-Jian-ChangGuiTi.ttf') format('truetype');
+      }
+      html,
+      body {
+        font-family: SF Pro SC !important;
+      }
+    </style>
   </head>
   <body>
     <noscript>Out-of-the-box mid-stage front/design solution!</noscript>
