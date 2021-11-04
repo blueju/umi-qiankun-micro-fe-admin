@@ -40,7 +40,17 @@ export default defineConfig({
   },
   // 快速刷新功能 https://umijs.org/config#fastrefresh
   fastRefresh: {},
+  /**
+   * 删除后可消除 ie11 识别模板字符串``为无效字符的报错
+   * 参考地址：
+   * https://github.com/umijs/umi/issues/6921#issuecomment-876093382
+   */
   esbuild: {},
+  /**
+   * 如果需要在 npm run start 本地测试阶段，用 ie11 测试，还需要注释下面这行：
+   * 参考地址：
+   * https://github.com/ant-design/ant-design-pro/issues/8927#issuecomment-903117560
+   */
   webpack5: {},
   /**
    * 因为需要的是动态注册子应用，所以此处置空即可。
@@ -48,5 +58,10 @@ export default defineConfig({
   qiankun: {
     master: {},
   },
+  /**
+   * 如果需要在 npm run start 本地测试阶段，用 ie11 测试，还需要注释下面这行：
+   * 参考地址：
+   * https://github.com/ant-design/ant-design-pro/issues/8927#issuecomment-903117560
+   */
   mfsu: {}
 });
