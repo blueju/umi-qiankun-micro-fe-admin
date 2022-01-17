@@ -19,4 +19,5 @@ export default defineConfig({
   history: {
     type: 'hash',
   },
+  publicPath: './',
 });
