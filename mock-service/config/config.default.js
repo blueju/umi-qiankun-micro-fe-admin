@@ -18,6 +18,21 @@ module.exports = appInfo => {
   // add your middleware config here
   config.middleware = [];
 
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+    domainWhiteList: [
+      /* 主应用 */
+      'http://localhost:8000',
+    ],
+  };
+
+  config.cors = {
+    // The value of the 'Access-Control-Allow-Credentials' header in the response is '' which must be 'true' when the request's credentials mode is 'include'.
+    credentials: true,
+  };
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
