@@ -6,22 +6,12 @@
 
 import { getAuthority } from './utils/authority';
 // import LoadingComponent from '@/components/PageLoading';
-
-/**
- * 根据环境获取正确的 url
- * @param api string
- * @returns {string|string}
- */
-function getCorrectUrlWithEnv(api) {
-  return process.env.NODE_ENV === 'production'
-    ? `http://rest.apizza.net/mock/107ab2963748da6c52e2463943c117be${api}`
-    : api;
-}
+import { baseUrl } from './utils/request';
 
 // 从接口中获取子应用配置，export 出的 qiankun 变量是一个 promise
 export const qiankun = () => {
   if (getAuthority()) {
-    return fetch(getCorrectUrlWithEnv('/api/getUserInfo'))
+    return fetch(baseUrl + '/getUserInfo')
       .then((res) => res.json())
       .then((resJson) => {
         const { apps = [], routes = [] } = resJson;

@@ -47,7 +47,10 @@ const errorHandler = (error) => {
  * @zh-CN 配置request请求时的默认参数
  */
 
+export const baseUrl = 'http://localhost:7000'
+
 const request = extend({
+  prefix: baseUrl,
   errorHandler,
   // default error handling
   credentials: 'include', // Does the default request bring cookies
