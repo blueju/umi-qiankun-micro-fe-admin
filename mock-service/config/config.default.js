@@ -24,7 +24,7 @@ module.exports = appInfo => {
     },
     domainWhiteList: [
       /* 主应用 */
-      'http://localhost:8000',
+      'http://localhost:5267',
     ],
   };
 
