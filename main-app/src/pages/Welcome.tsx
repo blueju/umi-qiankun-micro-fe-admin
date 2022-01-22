@@ -71,7 +71,9 @@ export default () => {
     Promise.allSettled(connectAppsPromiseList).then((res) => {
       res.forEach((item, index) => {
         newAppsWithConnectionStatus[index].connectionStatus =
-          item.status === 'fulfilled' ? appConnectionStatus.resolve : appConnectionStatus.reject;
+          item.status === 'fulfilled' && item.value.status === 200
+            ? appConnectionStatus.resolve
+            : appConnectionStatus.reject;
       });
       setAppsWithConnectionStatus(newAppsWithConnectionStatus);
     });
