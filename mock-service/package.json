@@ -26,7 +26,7 @@
   "scripts": {
     "start": "egg-scripts start --daemon --title=egg-server-mock-service",
     "stop": "egg-scripts stop --title=egg-server-mock-service",
-    "dev": "egg-bin dev",
+    "dev": "egg-bin dev --port 7000",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",
