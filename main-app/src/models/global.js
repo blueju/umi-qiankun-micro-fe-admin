@@ -105,7 +105,22 @@ const GlobalModel = {
     },
 
     /* 保存用户信息 */
-    saveUserInfo(state, { payload }) {
+    saveUserInfo(
+      state,
+      {
+        payload,
+        payload: {
+          userInfo: { apps = [] },
+        },
+      },
+    ) {
+      /* 新增 entry 应用入口，由域名+应用名拼接动态生成 */
+      payload.userInfo.apps = apps.map((item) => {
+        return {
+          ...item,
+          entry: `${window.location.origin}/${item.name}/`,
+        };
+      });
       localStorage.setItem(microFeAdminName, JSON.stringify(payload.userInfo));
       return { ...state, userInfo: payload.userInfo };
     },
