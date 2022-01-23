@@ -4,7 +4,7 @@ import { stringify } from 'querystring';
 
 import { fakeAccountLogin } from '@/services/login';
 import { setAuthority } from '@/utils/authority';
-import { getPageQuery } from '@/utils/utils';
+import { getPageQuery, microFeAdminName } from '@/utils/utils';
 
 const Model = {
   namespace: 'login',
@@ -57,6 +57,7 @@ const Model = {
 
       if (window.location.pathname !== '/user/login' && !redirect) {
         window.localStorage.removeItem('antd-pro-authority');
+        window.localStorage.removeItem(microFeAdminName);
         history.replace({
           pathname: '/user/login',
           search: stringify({
