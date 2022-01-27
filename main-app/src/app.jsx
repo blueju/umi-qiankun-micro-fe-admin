@@ -3,10 +3,37 @@
  * https://umijs.org/zh-CN/docs/load-on-demand
  */
 // import { dynamic } from 'umi';
+import storage from 'redux-persist/lib/storage';
+import { persistStore, persistReducer } from 'redux-persist';
 
 import { getAuthority } from './utils/authority';
 // import LoadingComponent from '@/components/PageLoading';
 import { baseUrl } from './utils/request';
+import { microFeAdminName } from './utils/utils';
+
+const persistConfig = {
+  key: microFeAdminName,
+  storage,
+  whitelist: ['global'],
+};
+
+const persistEnhancer = () => (createStore) => (reducer, initialState, enhancer) => {
+  const store = createStore(persistReducer(persistConfig, reducer), initialState, enhancer);
+  const persist = persistStore(store, null);
+  return { ...store, persist };
+};
+
+export const dva = {
+  config: {
+    onError(e) {
+      e.preventDefault();
+    },
+    extraEnhancers: [persistEnhancer()],
+    onReducer(reducer) {
+      return persistReducer(persistConfig, reducer);
+    },
+  },
+};
 
 // 从接口中获取子应用配置，export 出的 qiankun 变量是一个 promise
 export const qiankun = () => {
