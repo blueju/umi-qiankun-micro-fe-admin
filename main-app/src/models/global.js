@@ -1,4 +1,3 @@
-import { microFeAdminName } from '@/utils/utils';
 import { queryNotices } from '@/services/user';
 
 const GlobalModel = {
@@ -6,8 +5,10 @@ const GlobalModel = {
   state: {
     collapsed: false,
     notices: [],
-    /* 用户信息 */
-    userInfo: {},
+    /* 应用 */
+    apps: [],
+    /* 路由 */
+    routes: [],
   },
   effects: {
     *fetchNotices(_, { call, put, select }) {
@@ -104,25 +105,17 @@ const GlobalModel = {
       };
     },
 
-    /* 保存用户信息 */
-    saveUserInfo(
-      state,
-      {
-        payload,
-        payload: {
-          userInfo: { apps = [] },
-        },
-      },
-    ) {
+    /* 保存应用&路由 */
+    saveAppsRoutes(state, action) {
       /* 新增 entry 应用入口，由域名+应用名拼接动态生成 */
-      payload.userInfo.apps = apps.map((item) => {
+      const { apps: nativeApps = [], routes = [] } = action.payload;
+      const apps = nativeApps.map((item) => {
         return {
           ...item,
           entry: `${window.location.origin}/${item.name}/`,
         };
       });
-      localStorage.setItem(microFeAdminName, JSON.stringify(payload.userInfo));
-      return { ...state, userInfo: payload.userInfo };
+      return { ...state, apps, routes };
     },
   },
 };

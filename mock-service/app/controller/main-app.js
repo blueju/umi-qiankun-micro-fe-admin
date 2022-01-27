@@ -221,7 +221,7 @@ class MainAppController extends Controller {
         status: 'ok',
         type,
         currentAuthority: 'admin',
-        userInfo,
+        ...userInfo,
       };
       return;
     }
@@ -231,7 +231,7 @@ class MainAppController extends Controller {
         status: 'ok',
         type,
         currentAuthority: 'user',
-        userInfo,
+        ...userInfo,
       };
       return;
     }
@@ -241,7 +241,7 @@ class MainAppController extends Controller {
         status: 'ok',
         type,
         currentAuthority: 'admin',
-        userInfo,
+        ...userInfo,
       };
       return;
     }
@@ -250,7 +250,7 @@ class MainAppController extends Controller {
       status: 'error',
       type,
       currentAuthority: 'guest',
-      userInfo,
+      ...userInfo,
     };
   }
   async login_captcha() {

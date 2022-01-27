@@ -1,6 +1,6 @@
 import { noop } from 'lodash';
 // @ts-ignore
-import { history, Link } from 'umi';
+import { history, Link, connect } from 'umi';
 import React, { useEffect, useState } from 'react';
 import { Card, Avatar, Popover, Tooltip, Row, Col } from 'antd';
 import {
@@ -10,13 +10,23 @@ import {
   CloseCircleOutlined,
 } from '@ant-design/icons';
 
-import { IApp } from '../../mock/apps';
 // @ts-ignore
 import styles from './Welcome.less';
-import { microFeAdminName } from '@/utils/utils';
 
 const { Meta } = Card;
-const { apps } = JSON.parse(localStorage.getItem(microFeAdminName));
+
+interface IApp {
+  /* 应用名称 */
+  name: string;
+  /* 应用名称（中文） */
+  chineseName: string;
+  /* 应用入口 */
+  entry: string;
+  /* 应用图标 */
+  icon: string;
+  /* 应用首页 */
+  homepage: string;
+}
 
 /* 扩展了连通性状态的 app interface */
 interface IAppWithConnectionStatus extends IApp {
@@ -40,12 +50,12 @@ const appConnectionStatus: IAppConnectionStatus = {
   reject: 'reject',
 };
 
-export default () => {
+function Welcome(props) {
   // 带 app 连接状态的应用信息列表
   const [appsWithConnectionStatus, setAppsWithConnectionStatus] = useState<
     IAppWithConnectionStatus[]
   >(
-    apps.map((item) => {
+    props.apps.map((item) => {
       return {
         ...item,
         connectionStatus: 'pending',
@@ -194,4 +204,14 @@ export default () => {
       </Col>
     </Row>
   );
+}
+
+const mapStateToProps = (state) => {
+  const { apps = [], routes = [] } = state.global;
+  return {
+    apps,
+    routes,
+  };
 };
+
+export default connect(mapStateToProps)(Welcome);

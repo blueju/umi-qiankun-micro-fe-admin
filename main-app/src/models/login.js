@@ -23,9 +23,9 @@ const Model = {
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         message.success('🎉 🎉 🎉  登录成功！');
-        // 保存用户信息
+        /* 保存应用&路由 */
         yield put({
-          type: 'global/saveUserInfo',
+          type: 'global/saveAppsRoutes',
           payload: response,
         });
         let { redirect } = params;
