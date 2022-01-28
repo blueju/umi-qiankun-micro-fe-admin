@@ -114,7 +114,9 @@ function Welcome(props) {
             actions={[
               <Tooltip
                 key="appConnectionStatus"
-                title={`应用连通${item.connectionStatus===appConnectionStatus.resolve ? '正常' : '异常'}`}
+                title={`应用连通${
+                  item.connectionStatus === appConnectionStatus.resolve ? '正常' : '异常'
+                }`}
               >
                 <div>{renderAppConnectionStatusIcon(item.connectionStatus)}</div>
               </Tooltip>,
@@ -134,9 +136,7 @@ function Welcome(props) {
               >
                 <InfoCircleOutlined />
               </Popover>,
-              <Tooltip key="appEntry" title={`应用${item.connectionStatus ? '' : '不'}可访问`}>
-                <div>{renderAppEntryIcon(item.connectionStatus, item.homepage)}</div>
-              </Tooltip>,
+              <>{renderAppEntryIcon(item.connectionStatus, item.homepage)}</>,
             ]}
           >
             <Meta
