@@ -73,19 +73,14 @@ function Welcome(props) {
 
   /* 检测应用连通性 */
   function checkAppConnection() {
-    const connectAppsPromiseList: Promise<Response>[] = appsWithConnectionStatus.map((item) => {
-      return fetch(item.entry);
-    });
-    const newAppsWithConnectionStatus = [...appsWithConnectionStatus];
-    // @ts-ignore
-    Promise.allSettled(connectAppsPromiseList).then((res) => {
-      res.forEach((item, index) => {
-        newAppsWithConnectionStatus[index].connectionStatus =
-          item.status === 'fulfilled' && item.value.status === 200
-            ? appConnectionStatus.resolve
-            : appConnectionStatus.reject;
+    appsWithConnectionStatus.forEach((item, index) => {
+      fetch(item.entry).then((res) => {
+        const status =
+          res.status === 200 ? appConnectionStatus.resolve : appConnectionStatus.reject;
+        const newAppsWithConnectionStatus = [...appsWithConnectionStatus];
+        newAppsWithConnectionStatus[index].connectionStatus = status;
+        setAppsWithConnectionStatus(newAppsWithConnectionStatus);
       });
-      setAppsWithConnectionStatus(newAppsWithConnectionStatus);
     });
   }
 
