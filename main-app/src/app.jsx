@@ -8,7 +8,6 @@ import { persistStore, persistReducer } from 'redux-persist';
 
 import { getAuthority } from './utils/authority';
 // import LoadingComponent from '@/components/PageLoading';
-import { baseUrl } from './utils/request';
 import { microFeAdminName } from './utils/utils';
 
 const persistConfig = {
@@ -38,31 +37,29 @@ export const dva = {
 // 从接口中获取子应用配置，export 出的 qiankun 变量是一个 promise
 export const qiankun = () => {
   if (getAuthority()) {
-    return fetch(baseUrl + '/getUserInfo')
-      .then((res) => res.json())
-      .then((resJson) => {
-        const { apps = [], routes = [] } = resJson;
-        const handleRoutes = (innerRoutes) => {
-          return innerRoutes.map((item) => {
-            return {
-              ...item,
-              microApp: item.app,
-            };
-          });
+    // 此时 dva 还未实例化，因此无法从 dva 中获取数据
+    const { global = '{}' } = JSON.parse(localStorage.getItem(`persist:${microFeAdminName}`));
+    const { apps = [], routes = [] } = JSON.parse(global);
+    const handleRoutes = (innerRoutes) => {
+      return innerRoutes.map((item) => {
+        return {
+          ...item,
+          microApp: item.app,
         };
-        return Promise.resolve({
-          // 注册子应用信息
-          apps,
-          routes: handleRoutes(routes),
-          // 完整生命周期钩子请看 https://qiankun.umijs.org/zh/api/#registermicroapps-apps-lifecycles
-          lifeCycles: {
-            afterMount: (props) => {
-              console.log(props);
-            },
-          },
-          // 支持更多的其他配置，详细看这里 https://qiankun.umijs.org/zh/api/#start-opts
-        });
       });
+    };
+    return Promise.resolve({
+      // 注册子应用信息
+      apps,
+      routes: handleRoutes(routes),
+      // 完整生命周期钩子请看 https://qiankun.umijs.org/zh/api/#registermicroapps-apps-lifecycles
+      lifeCycles: {
+        afterMount: (props) => {
+          console.log(props);
+        },
+      },
+      // 支持更多的其他配置，详细看这里 https://qiankun.umijs.org/zh/api/#start-opts
+    });
   }
   return Promise.resolve({
     // 注册子应用信息
