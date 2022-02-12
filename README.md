@@ -25,6 +25,9 @@ start nginx-1.20.2
 // 子应用
 cd sub-app-*
 npm run start / npm run dev / npm run serve（视子应用所用框架具体启动命令而定）
+
+// 访问
+http://localhost:5267/
 ```
 
 ## 为什么使用 nginx
