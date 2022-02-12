@@ -36,17 +36,21 @@ export default [
                 hideInMenu: true,
               },
               {
-                path: '/admin',
-                name: 'admin',
-                icon: 'crown',
-                component: './Admin',
+                path: '/main-app',
+                name: '主应用',
                 authority: ['admin'],
+                flatMenu: true,
                 routes: [
+                  // 进入权限管理，默认跳转至应用管理
                   {
-                    path: '/admin/sub-page',
-                    name: 'sub-page',
+                    path: '/main-app/',
+                    redirect: '/main-app/app-manage',
+                  },
+                  {
+                    path: '/main-app/app-manage',
+                    name: '应用管理',
                     icon: 'smile',
-                    component: './Welcome',
+                    component: './AppManage/',
                     authority: ['admin'],
                   },
                 ],

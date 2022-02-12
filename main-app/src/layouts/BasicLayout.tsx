@@ -12,6 +12,7 @@ import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { getMatchMenu } from '@umijs/route-utils';
 import logo from '../assets/logo.svg';
+import { getCurrentAppName } from '../utils/utils';
 
 const noMatch = (
   <Result
@@ -27,14 +28,18 @@ const noMatch = (
 );
 
 /** Use Authorized check all menu item */
-const menuDataRender = (menuList) =>
-  menuList.map((item) => {
+const menuDataRender = (menuList) => {
+  console.log(menuList);
+  /* 过滤菜单，只显示本应用的菜单 */
+  const filteredMenuList = menuList.filter((item) => item.path.startsWith(`/${getCurrentAppName()}`));
+  return filteredMenuList.map((item) => {
     const localItem = {
       ...item,
       children: item.children ? menuDataRender(item.children) : undefined,
     };
     return Authorized.check(item.authority, localItem, null);
   });
+};
 
 const defaultFooterDom = (
   <DefaultFooter
